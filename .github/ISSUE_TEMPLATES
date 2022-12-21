@@ -1,0 +1,12 @@
+**As a** developer  
+**I need** to create an account microservice to keep track of the customers on e-commerce website  
+**So that** customers can use REST API to call on other microservices   
+      
+### Details and Assumptions
+    * [document what you know]
+    
+### Acceptance Criteria     
+    gherkin 
+    Given [some context]
+    When [certain action is taken]
+    Then [the outcome of action is observed]
