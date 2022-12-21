@@ -3,10 +3,11 @@
 **So that** customers can use REST API to call on other microservices   
       
 ### Details and Assumptions
-    * [document what you know]
+    * Maintain customers e-commerce website
+    * The service only needs read, update, delete, and list customers
     
 ### Acceptance Criteria     
     gherkin 
-    Given [some context]
-    When [certain action is taken]
-    Then [the outcome of action is observed]
+    Given the task for development microsevices
+    When there is an other team already developed the database model with an endpoint
+    Then I only add the REST APIs to make it workable
