@@ -136,6 +136,7 @@ class TestAccountService(TestCase):
         account = self.client.get(f"{BASE_URL}/{0}")
         self.assertEqual(account.status_code, status.HTTP_404_NOT_FOUND)
 
+
     def test_list_all_account(self):
         self._create_accounts(5)
         req_resp = self.client.get(f"{BASE_URL}")
