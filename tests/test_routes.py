@@ -124,3 +124,43 @@ class TestAccountService(TestCase):
         self.assertEqual(response.status_code, status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
     # ADD YOUR TEST CASES HERE ...
+
+    def test_read_an_account(self) :
+        account = self._create_accounts(1)[0]
+        new_acc = self.client.get(f"{BASE_URL}/{account.id}", content_type="application/json")
+        self.assertEqual(new_acc.status_code, status.HTTP_200_OK)
+        res = new_acc.get_json()
+        self.assertEqual(res['name'], account.name)
+
+    def test_account_not_found(self) :
+        account = self.client.get(f"{BASE_URL}/{0}")
+        self.assertEqual(account.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_list_all_account(self):
+        self._create_accounts(5)
+        req_resp = self.client.get(f"{BASE_URL}")
+        self.assertEqual(req_resp.status_code, status.HTTP_200_OK)
+        data = req_resp.get_json()
+        self.assertEqual(len(data), 5)   
+
+    def test_update_account(self):
+        test_account = AccountFactory()
+        update = self.client.post(BASE_URL, json=test_account.serialize())
+        self.assertEqual(update.status_code, status.HTTP_201_CREATED)
+        get_data = update.get_json()
+        get_data['name'] = "Testing more complex"
+        add_data = self.client.put(f"{BASE_URL}/{get_data['id']}", json=get_data)
+        self.assertEqual(add_data.status_code, status.HTTP_200_OK)
+        resp = add_data.get_json()
+        self.assertEqual(resp['name'], "Testing more complex")
+
+    def test_delete_account(self):
+        account = self._create_accounts(1)[0]
+        delete = self.client.delete(f"{BASE_URL}/{account.id}")
+        self.assertEqual(delete.status_code, status.HTTP_204_NO_CONTENT)
+
+    
+    def test_method_not_allowed(self):
+        data = self.client.delete(BASE_URL)
+        self.assertEqual(data.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
