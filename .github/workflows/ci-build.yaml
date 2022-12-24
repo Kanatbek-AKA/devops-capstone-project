@@ -25,7 +25,7 @@ jobs:
            --health-retries 5            
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/Kanatbek-AKA@main
 
       - name: Install dependencies
         run: |
