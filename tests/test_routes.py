@@ -140,8 +140,7 @@ class TestAccountService(TestCase):
     def test_account_not_found(self):
         account = self.client.get(f"{BASE_URL}/{0}")
         self.assertEqual(account.status_code, status.HTTP_404_NOT_FOUND)
-
-
+        
     def test_list_all_account(self):
         self._create_accounts(5)
         req_resp = self.client.get(f"{BASE_URL}")
@@ -168,7 +167,7 @@ class TestAccountService(TestCase):
     def test_method_not_allowed(self):
         data = self.client.delete(BASE_URL)
         self.assertEqual(data.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
-    
+        
     # Talisman 
     def test_security_headers(self):
         res = self.client.get('/',  environ_overrides=HTTPS_ENVIRON)
