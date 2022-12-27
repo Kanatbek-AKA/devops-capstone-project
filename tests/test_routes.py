@@ -24,6 +24,7 @@ BASE_URL = "/accounts"
 
 HTTPS_ENVIRON = {'wsgi.url_scheme': 'https'}
 
+
 ######################################################################
 #  T E S T   C A S E S
 ######################################################################
@@ -130,14 +131,14 @@ class TestAccountService(TestCase):
 
     # ADD YOUR TEST CASES HERE ...
 
-    def test_read_an_account(self) :
+    def test_read_an_account(self):
         account = self._create_accounts(1)[0]
         new_acc = self.client.get(f"{BASE_URL}/{account.id}", content_type="application/json")
         self.assertEqual(new_acc.status_code, status.HTTP_200_OK)
         res = new_acc.get_json()
         self.assertEqual(res['name'], account.name)
 
-    def test_account_not_found(self) :
+    def test_account_not_found(self):
         account = self.client.get(f"{BASE_URL}/{0}")
         self.assertEqual(account.status_code, status.HTTP_404_NOT_FOUND)
 
@@ -165,14 +166,13 @@ class TestAccountService(TestCase):
         delete = self.client.delete(f"{BASE_URL}/{account.id}")
         self.assertEqual(delete.status_code, status.HTTP_204_NO_CONTENT)
 
-    
     def test_method_not_allowed(self):
         data = self.client.delete(BASE_URL)
         self.assertEqual(data.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
-# Talisman 
+    # Talisman 
     def test_security_headers(self):
-        res = self.client.get('/',  environ_overrides=HTTPS_ENVIRON )
+        res = self.client.get('/',  environ_overrides=HTTPS_ENVIRON)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         headers = {
             'X-Frame-Options': 'SAMEORIGIN',
