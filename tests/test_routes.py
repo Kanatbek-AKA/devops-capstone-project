@@ -186,6 +186,4 @@ class TestAccountService(TestCase):
         res = self.client.get("/", environ_overrides=HTTPS_ENVIRON)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.headers.get('Access-Control-Allow-Origin'), '*')
-        
-
-        
+# This is a new line that ends the file.
