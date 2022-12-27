@@ -12,7 +12,6 @@ from tests.factories import AccountFactory
 from service.common import status  # HTTP Status Codes
 from service.models import db, Account, init_db
 from service.routes import app
-#
 from service import talisman 
 
 
@@ -168,7 +167,7 @@ class TestAccountService(TestCase):
     def test_method_not_allowed(self):
         data = self.client.delete(BASE_URL)
         self.assertEqual(data.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
-
+        
     # Talisman 
     def test_security_headers(self):
         res = self.client.get('/',  environ_overrides=HTTPS_ENVIRON)
