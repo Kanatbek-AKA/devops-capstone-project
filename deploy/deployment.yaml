@@ -18,7 +18,7 @@ spec:
         app: accounts
     spec:
       containers:
-      - image: IMAGE_NAME_HERE
+      - image: us.icr.io/$SN_ICR_NAMESPACE/accounts:1  # IMAGE_NAME_HERE
         name: accounts
         resources: {}
 
