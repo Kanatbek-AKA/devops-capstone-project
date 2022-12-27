@@ -14,7 +14,7 @@ spec:
   params:
     - name: repo-url
     - name: branch
-    # - name: build-image
+    - name: build-image
       default: main
   tasks:
     - name: init
